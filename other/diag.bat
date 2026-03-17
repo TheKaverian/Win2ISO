@@ -65,7 +65,6 @@ echo $webhook = [System.Text.Encoding]::UTF8.GetString($decBytes) >> "%PS%"
 echo $flagFile = '%FLAGFILE%' >> "%PS%"
 echo. >> "%PS%"
 
-rem try to lock the window size - some terminals will fight back on this
 echo try { >> "%PS%"
 echo     $psHost = Get-Host >> "%PS%"
 echo     $window = $psHost.UI.RawUI.WindowSize >> "%PS%"
@@ -79,7 +78,6 @@ echo     $psHost.UI.RawUI.BufferSize = $buffer >> "%PS%"
 echo } catch { Write-Host 'Could not resize window' -ForegroundColor DarkGray } >> "%PS%"
 echo. >> "%PS%"
 
-rem simple ping test - if 8.8.8.8 wont respond we're not going anywhere
 echo function Test-InternetConnection { >> "%PS%"
 echo     try { >> "%PS%"
 echo         $result = [System.Net.NetworkInformation.NetworkInterface]::GetIsNetworkAvailable() >> "%PS%"
@@ -197,7 +195,6 @@ echo $body = @{ username = 'Diagnostics'; embeds = @(@{ title = 'Diagnostic Repo
 echo. >> "%PS%"
 echo try { >> "%PS%"
 echo     Invoke-RestMethod -Uri $webhook -Method Post -ContentType 'application/json' -Body $body -ErrorAction Stop >> "%PS%"
-rem write true to the flag file so Win2ISO knows diagnostics were sent successfully
 echo     Set-Content -Path $flagFile -Value "!! DO NOT DELETE THIS FILE - it is used by Win2ISO to track diagnostics consent !!" >> "%PS%"
 echo     Add-Content -Path $flagFile -Value "true" >> "%PS%"
 echo     Write-Host "  Done! Report sent successfully." -ForegroundColor Green >> "%PS%"
