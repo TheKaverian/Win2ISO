@@ -53,6 +53,7 @@ If you have any feedback, please reach out at kaverian@proton.me or at kaverian6
 
 - [@TheKaverian](https://www.github.com/TheKaverian) - main developer
 - [@Wild-Chicken](https://github.com/Wild-Chicken) - helped with minor tweaks and things
+- [Blinx](https://youtube.com/@txsquishy) - made the logo
 
 # 
 ![Logo](https://imgup.uk/i/rhOCjcR9.png)
