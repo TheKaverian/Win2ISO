@@ -42,7 +42,7 @@ Simply go on the "releases" link on the right hand side to see the most recent v
    - [ ] Windows 11, Server & LTSC Links 
  - [x] Make a cURL installer
  - [x] Error handle lacking Powershell
- - [?] Add a Diagnostics page 
+ - [x] Add a Diagnostics page 
 
 ## Feedback
 
