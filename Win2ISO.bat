@@ -16,7 +16,7 @@ mode con: cols=80 lines=20
 setlocal
 title Win2ISO %VER%
 
-powershell.exe -NoProfile -Command "exit" >nul 2>&1
+where powershell.exe >nul 2>&1
 if errorlevel 1 (
     cls
     color 0C
@@ -77,10 +77,10 @@ if "%DIAG_SKIP%"=="0" (
     )
 )
 
-set "PS=%TEMP%\win2iso.ps1"
+set "PS=%DIAG_DIR%\win2iso_%VER%.ps1"
 set "CURL_INSTALLER=%TEMP%\curl_installer.bat"
 
-del "%PS%" 2>nul
+if exist "%PS%" goto :run_ps
 
 echo [Console]::CursorVisible = $false >> "%PS%"
 echo $host.UI.RawUI.WindowTitle = 'Win2ISO %VER%' >> "%PS%"
@@ -814,7 +814,7 @@ del "%CURL_INSTALLER%" 2>nul
     echo pause
     echo exit /b 0
 ) > "%CURL_INSTALLER%"
+:run_ps
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%PS%"
-del "%PS%" 2>nul
 del "%CURL_INSTALLER%" 2>nul
 endlocal
