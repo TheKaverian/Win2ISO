@@ -41,7 +41,7 @@ Simply go on the "releases" link on the right hand side to see the most recent v
    - [x] Windows 10 Links
    - [ ] Windows 11, Server & LTSC Links 
  - [x] Make a cURL installer
- - [] Add a updating process
+ - [ ] Add a updating process
  - [x] Add a Diagnostics page 
 
 ## Feedback
