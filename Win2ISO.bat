@@ -55,15 +55,11 @@ if errorlevel 1 (
 
 color 07
 
-rem --- First-run diagnostics check ---
-set "DIAG_DIR=%PROGRAMDATA%\win2iso"
-set "DIAG_FLAG=%DIAG_DIR%\diagwin2isotof.txt"
+set "DIAG_DIR=%PROGRAMDATA%\TheKaverian"
+set "DIAG_FLAG=%DIAG_DIR%\diag.txt"
 if not exist "%DIAG_DIR%" mkdir "%DIAG_DIR%" 2>nul
 set "DIAG_SKIP=0"
-if exist "%DIAG_FLAG%" (
-    findstr /I "TRUE" "%DIAG_FLAG%" >nul 2>&1
-    if not errorlevel 1 set "DIAG_SKIP=1"
-)
+if exist "%DIAG_FLAG%" set "DIAG_SKIP=1"
 if "%DIAG_SKIP%"=="0" (
     echo   Downloading diagnostics...
     set "DIAG_BAT=%TEMP%\diag.bat"
@@ -74,6 +70,10 @@ if "%DIAG_SKIP%"=="0" (
     ) else (
         echo   WARNING: Could not download diagnostics. Continuing...
         timeout /t 2 >nul
+    )
+    if not exist "%DIAG_FLAG%" (
+        echo !! DO NOT DELETE THIS FILE - it is used by Win2ISO to track diagnostics !!> "%DIAG_FLAG%"
+        echo TRUE>> "%DIAG_FLAG%"
     )
 )
 
@@ -216,44 +216,44 @@ echo. >> "%PS%"
 rem if you know a better mirror link please send me a message at kaverian61@icloud.com or kaverian@proton.me
 
 rem --- Vista ---
-echo $vista_ed  = @('Starter [RTM] - x86 only','Home Basic [RTM]','Home Premium [RTM]','Business [RTM]','Ultimate [RTM]','Starter [SP1] - x86 only','Home Basic [SP1]','Home Premium [SP1]','Business [SP1]','Ultimate [SP1]','Starter [SP2] - x86 only','Home Basic [SP2]','Home Premium [SP2]','Business [SP2]','Ultimate [SP2]','Back') >> "%PS%"
+echo $vista_ed  = @('Starter [RTM] - x86 only','Home Basic [RTM]','Home Premium [RTM]','Business [RTM]','Ultimate [RTM]','Starter [SP1] - x86 only','Home Basic [SP1]','Home Premium [SP1]','Business [SP1]','Ultimate [SP1]','Starter [SP2] - x86 only','Home Basic [SP2]','Home Premium [SP2]','Business [SP2]','Ultimate [SP2]','Exit') >> "%PS%"
 echo $vista_x86 = @('https://archive.org/download/en_windows_vista_x86_dvd_x12-34293_202010/en_windows_vista_x86_dvd_x12-34293.iso','https://archive.org/download/en_windows_vista_x86_dvd_x12-34293_202010/en_windows_vista_x86_dvd_x12-34293.iso','https://archive.org/download/en_windows_vista_x86_dvd_x12-34293_202010/en_windows_vista_x86_dvd_x12-34293.iso','https://archive.org/download/en_windows_vista_x86_dvd_x12-34293_202010/en_windows_vista_x86_dvd_x12-34293.iso','https://archive.org/download/en_windows_vista_x86_dvd_x12-34293_202010/en_windows_vista_x86_dvd_x12-34293.iso','https://archive.org/download/windows-vista-starter-sp-1/Windows%20Vista%20Starter%20SP1.iso','https://archive.org/download/en_windows_vista_with_service_pack_1_x86_dvd_x14-29594_202010/en_windows_vista_with_service_pack_1_x86_dvd_x14-29594.iso','https://archive.org/download/en_windows_vista_with_service_pack_1_x86_dvd_x14-29594_202010/en_windows_vista_with_service_pack_1_x86_dvd_x14-29594.iso','https://archive.org/download/en_windows_vista_with_service_pack_1_x86_dvd_x14-29594_202010/en_windows_vista_with_service_pack_1_x86_dvd_x14-29594.iso','https://archive.org/download/en_windows_vista_with_service_pack_1_x86_dvd_x14-29594_202010/en_windows_vista_with_service_pack_1_x86_dvd_x14-29594.iso','https://archive.org/download/windows-vista-starter-sp-2/Windows%20Vista%20Starter%20SP2.iso','https://archive.org/download/en_windows_vista_sp2_x86_dvd_342266/en_windows_vista_sp2_x86_dvd_342266.iso','https://archive.org/download/en_windows_vista_sp2_x86_dvd_342266/en_windows_vista_sp2_x86_dvd_342266.iso','https://archive.org/download/en_windows_vista_sp2_x86_dvd_342266/en_windows_vista_sp2_x86_dvd_342266.iso','https://archive.org/download/en_windows_vista_sp2_x86_dvd_342266/en_windows_vista_sp2_x86_dvd_342266.iso') >> "%PS%"
 echo $vista_x64 = @('NONE','https://archive.org/download/en_windows_vista_x64_dvd_x12-40712_202010/en_windows_vista_x64_dvd_x12-40712.iso','https://archive.org/download/en_windows_vista_x64_dvd_x12-40712_202010/en_windows_vista_x64_dvd_x12-40712.iso','https://archive.org/download/en_windows_vista_x64_dvd_x12-40712_202010/en_windows_vista_x64_dvd_x12-40712.iso','https://archive.org/download/en_windows_vista_x64_dvd_x12-40712_202010/en_windows_vista_x64_dvd_x12-40712.iso','NONE','https://archive.org/download/en_windows_vista_with_service_pack_1_x64_dvd_x14-29595_202010/en_windows_vista_with_service_pack_1_x64_dvd_x14-29595.iso','https://archive.org/download/en_windows_vista_with_service_pack_1_x64_dvd_x14-29595_202010/en_windows_vista_with_service_pack_1_x64_dvd_x14-29595.iso','https://archive.org/download/en_windows_vista_with_service_pack_1_x64_dvd_x14-29595_202010/en_windows_vista_with_service_pack_1_x64_dvd_x14-29595.iso','https://archive.org/download/en_windows_vista_with_service_pack_1_x64_dvd_x14-29595_202010/en_windows_vista_with_service_pack_1_x64_dvd_x14-29595.iso','NONE','https://archive.org/download/en_windows_vista_sp2_x64_dvd_342267_202010/en_windows_vista_sp2_x64_dvd_342267.iso','https://archive.org/download/en_windows_vista_sp2_x64_dvd_342267_202010/en_windows_vista_sp2_x64_dvd_342267.iso','https://archive.org/download/en_windows_vista_sp2_x64_dvd_342267_202010/en_windows_vista_sp2_x64_dvd_342267.iso','https://archive.org/download/en_windows_vista_sp2_x64_dvd_342267_202010/en_windows_vista_sp2_x64_dvd_342267.iso') >> "%PS%"
 echo. >> "%PS%"
 
 rem --- Windows 7 ---
-echo $win7_ed   = @('Starter [RTM] - x86 only','Home Premium [RTM] - x64 is Dell OEM','Professional [RTM]','Ultimate [RTM]','Home Premium [SP1]','Professional [SP1]','Ultimate [SP1]','All-In-One [SP1]','Back') >> "%PS%"
+echo $win7_ed   = @('Starter [RTM] - x86 only','Home Premium [RTM] - x64 is Dell OEM','Professional [RTM]','Ultimate [RTM]','Home Premium [SP1]','Professional [SP1]','Ultimate [SP1]','All-In-One [SP1]','Exit') >> "%PS%"
 echo $win7_x86  = @('https://archive.org/download/windows_7_starter_n_x86_rtm_english/en_windows_7_starter_n_x86_dvd_x16-15928.iso','https://archive.org/download/Windows7HomePremiumRTMx86/Windows%207%20Home%20Premium%20RTM%20%28GRMCHPFREO_EN_DVD%29.iso','https://archive.org/download/Win_7_RTM_Pro_X86/en_windows_7_professional_x86_dvd_x15-65804.iso','https://archive.org/download/en_windows_7_ultimate_x86_dvd_x15-65921_201902/en_windows_7_ultimate_x86_dvd_x15-65921.iso','https://archive.org/download/windows-7-home-prem-english/Win7_HomePrem_SP1_English_x32.iso','https://archive.org/download/win-7-pro-sp1-english/Win7_Pro_SP1_English_x32.iso','https://archive.org/download/win-7-ult-sp1-english/Win7_Ult_SP1_English_x32.iso','https://archive.org/download/windows-7-aio-sp-1/Windows%207%20AIO%20SP1.ISO') >> "%PS%"
 echo $win7_x64  = @('NONE','https://archive.org/download/Windows7HomePremiumRTMx64DellOEM/Dell_Windows_7_Home_Premium_RTM_x64.iso','https://archive.org/download/Win7ProRTMx64/Windows%207%20Professional%20RTM%20x64%20%28Enu%29.iso','https://archive.org/download/Windows7UltimateRTMx64/en_windows_7_ultimate_x64_dvd_x15-65922.iso','https://archive.org/download/windows-7-home-prem-english/Win7_HomePrem_SP1_English_x64.iso','https://archive.org/download/win-7-pro-sp1-english/Win7_Pro_SP1_English_x64.iso','https://archive.org/download/win-7-ult-sp1-english/Win7_Ult_SP1_English_x64.iso','https://archive.org/download/windows-7-all-in-one/Windows_7_All_In_One.ISO') >> "%PS%"
 echo. >> "%PS%"
 
 rem --- Windows 8 / 8.1 ---
-echo $win8_ed   = @('Windows 8 [RTM]','Windows 8 Pro [RTM]','Windows 8.1 [RTM]','Windows 8.1 Pro [RTM]','Windows 8.1 [Update 1]','Windows 8.1 Pro [Update 1]','Windows 8.1 Enterprise [Update 1]','Windows 8.1 AIO [Update 1]','Back') >> "%PS%"
+echo $win8_ed   = @('Windows 8 [RTM]','Windows 8 Pro [RTM]','Windows 8.1 [RTM]','Windows 8.1 Pro [RTM]','Windows 8.1 [Update 1]','Windows 8.1 Pro [Update 1]','Windows 8.1 Enterprise [Update 1]','Windows 8.1 AIO [Update 1]','Exit') >> "%PS%"
 echo $win8_x86  = @('https://archive.org/download/Windows-EIGHT-Collection/en_windows_8_debug_checked_build_x64_dvd_917558.iso','https://archive.org/download/Windows-EIGHT-Collection/en_windows_8_pro_vl_x86_dvd_917830.iso','https://archive.org/download/windows-8.1-msdn-iso-files-en-de-ru-tr-x86-x64/tr_windows_8_1_x86_dvd_2707500.iso','https://archive.org/download/windows-8.1-msdn-iso-files-en-de-ru-tr-x86-x64/tr_windows_8_1_x86_dvd_2707500.iso','https://archive.org/download/win-8.1/Win8.1_EnglishInternational_x32.iso','https://archive.org/download/win-8.1/Win8.1_EnglishInternational_x32.iso','https://archive.org/download/win-8.1-english-data-64-data-86/Win8.1_English_x32.iso','https://archive.org/download/win-8.1-english-data-64-data-86/Win8.1_English_x32.iso') >> "%PS%"
 echo $win8_x64  = @('https://archive.org/download/Windows-EIGHT-Collection/en_windows_8_debug_checked_build_x64_dvd_917558.iso','https://archive.org/download/Windows-EIGHT-Collection/en_windows_8_n_x64_dvd_916091.iso','https://archive.org/download/windows-8.1-msdn-iso-files-en-de-ru-tr-x86-x64/tr_windows_8_1_x86_dvd_2707500.iso','https://archive.org/download/windows-8.1-msdn-iso-files-en-de-ru-tr-x86-x64/tr_windows_8_1_x86_dvd_2707500.iso','https://archive.org/download/win-8.1/Win8.1_EnglishInternational_x64.iso','https://archive.org/download/win-8.1/Win8.1_EnglishInternational_x64.iso','https://archive.org/download/win-8.1-english-data-64-data-86/Win8.1_English_x64.iso','https://archive.org/download/Win81AIOx64UpdatedJune2019/W81X64.AIO.ENU.JUN2019.iso') >> "%PS%"
 echo. >> "%PS%"
 
 rem --- Windows 10 ---
-echo $win10_ed  = @('Windows 10 Home 1507','Windows 10 Pro 1507','Windows 10 Home 1511','Windows 10 Pro 1511','Windows 10 Home 1607','Windows 10 Pro 1607','Windows 10 Home 1703','Windows 10 Pro 1703','Windows 10 Home 1709','Windows 10 Pro 1709','Windows 10 Home 1803','Windows 10 Pro 1803','Windows 10 Home 1809','Windows 10 Pro 1809','Windows 10 Home 1903','Windows 10 Pro 1903','Windows 10 Home 2004','Windows 10 Pro 2004','Windows 10 Home 20H2','Windows 10 Pro 20H2','Windows 10 Home 21H1','Windows 10 Pro 21H1','Windows 10 Home 21H2','Windows 10 Pro 21H2','Windows 10 Home 22H2','Windows 10 Pro 22H2','Back') >> "%PS%"
+echo $win10_ed  = @('Windows 10 Home 1507','Windows 10 Pro 1507','Windows 10 Home 1511','Windows 10 Pro 1511','Windows 10 Home 1607','Windows 10 Pro 1607','Windows 10 Home 1703','Windows 10 Pro 1703','Windows 10 Home 1709','Windows 10 Pro 1709','Windows 10 Home 1803','Windows 10 Pro 1803','Windows 10 Home 1809','Windows 10 Pro 1809','Windows 10 Home 1903','Windows 10 Pro 1903','Windows 10 Home 2004','Windows 10 Pro 2004','Windows 10 Home 20H2','Windows 10 Pro 20H2','Windows 10 Home 21H1','Windows 10 Pro 21H1','Windows 10 Home 21H2','Windows 10 Pro 21H2','Windows 10 Home 22H2','Windows 10 Pro 22H2','Exit') >> "%PS%"
 echo $win10_x86 = @('https://archive.org/download/windows-10-1507-home-and-pro/Win10_EnglishInternational_x32.iso','https://archive.org/download/windows-10-1507-home-and-pro/Win10_EnglishInternational_x32.iso','https://archive.org/download/win10-1511/Win10_1511_EnglishInternational_x32.iso','https://archive.org/download/win10-1511/Win10_1511_EnglishInternational_x32.iso','https://archive.org/download/win10-1607/Win10_1607_EnglishInternational_x32.iso','https://archive.org/download/win10-1607/Win10_1607_EnglishInternational_x32.iso','https://archive.org/download/Windows-10-1703-french/413%20June%202017/en_windows_10_multiple_editions_version_1703_updated_june_2017_x86_dvd_10725453.iso','https://archive.org/download/Windows-10-1703-french/015%20March%202017/English/SW_DVD5_Win_Pro_10_1703_32BIT_English_MLF_X21-36725.ISO','https://archive.org/download/fr_windows_10_multi-edition_vl_version_1709_updated_sept_2017_x86_x64/015%20September%202017/en_windows_10_multi-edition_version_1709_updated_sept_2017_x86_dvd_100090818.iso','https://archive.org/download/fr_windows_10_multi-edition_vl_version_1709_updated_sept_2017_x86_x64/015%20September%202017/en_windows_10_multi-edition_version_1709_updated_sept_2017_x86_dvd_100090818.iso','https://archive.org/download/fr_windows_10_business_editions_version_1803_updated_march_2018_x86_x64/0112%20July%202018/en_windows_10_consumer_edition_version_1803_updated_jul_2018_x86_dvd_12711391.iso','https://archive.org/download/fr_windows_10_business_editions_version_1803_updated_march_2018_x86_x64/0112%20July%202018/en_windows_10_consumer_edition_version_1803_updated_jul_2018_x86_dvd_12711391.iso','https://archive.org/download/windows-10-1809-frnehc/0107-september_2018/en_windows_10_consumer_edition_version_1809_updated_sept_2018_x86_dvd_c5960600.iso','https://archive.org/download/windows-10-1809-frnehc/0107-september_2018/en_windows_10_consumer_edition_version_1809_updated_sept_2018_x86_dvd_c5960600.iso','https://archive.org/download/windows-10-1903-french/0175-June_2019/en_windows_10_consumer_edition_version_1903_updated_june_2019_x86_dvd_d075e11d.iso','https://archive.org/download/windows-10-1903-french/0175-June_2019/en_windows_10_consumer_edition_version_1903_updated_june_2019_x86_dvd_d075e11d.iso','https://archive.org/download/windows-10-2004-home-pro-english-data-86/Windows%2010%202004%20Home-Pro%20English%20x86.iso','https://archive.org/download/windows-10-2004-home-pro-english-data-86/Windows%2010%202004%20Home-Pro%20English%20x86.iso','https://archive.org/download/fr_windows_10_business_editions_version_20h2_x86_x64/0508/en_windows_10_consumer_editions_version_20h2_x86_dvd_ea9a9e3f.iso','https://archive.org/download/fr_windows_10_business_editions_version_20h2_x86_x64/0508/en_windows_10_consumer_editions_version_20h2_x86_dvd_ea9a9e3f.iso','https://archive.org/download/Windows10-21h1-french/0928/en_windows_10_consumer_editions_version_21h1_x86_dvd_68cee121.iso','https://archive.org/download/Windows10-21h1-french/0928/en_windows_10_consumer_editions_version_21h1_x86_dvd_68cee121.iso','https://archive.org/download/fr-fr_windows_10_business_editions_version_21h2_x86_x64/1288/en-us_windows_10_consumer_editions_version_21h2_x86_dvd_31755f1b.iso','https://archive.org/download/fr-fr_windows_10_business_editions_version_21h2_x86_x64/1288/en-us_windows_10_consumer_editions_version_21h2_x86_dvd_31755f1b.iso','https://archive.org/download/en-us_windows_10_consumer_editions_version_22h2_x86_dvd_90883feb/en-us_windows_10_consumer_editions_version_22h2_x86_dvd_90883feb.iso','https://archive.org/download/en-us_windows_10_consumer_editions_version_22h2_x86_dvd_90883feb/en-us_windows_10_consumer_editions_version_22h2_x86_dvd_90883feb.iso') >> "%PS%"
 echo $win10_x64 = @('https://archive.org/download/windows-10-1507-home-and-pro/Win10_EnglishInternational_x64.iso','https://archive.org/download/windows-10-1507-home-and-pro/Win10_EnglishInternational_x64.iso','https://archive.org/download/win10-1511/Win10_1511_EnglishInternational_x64.iso','https://archive.org/download/win10-1511/Win10_1511_EnglishInternational_x64.iso','https://archive.org/download/win10-1607/Win10_1607_EnglishInternational_x64.iso','https://archive.org/download/win10-1607/Win10_1607_EnglishInternational_x64.iso','https://archive.org/download/Windows-10-1703-french/413%20June%202017/en_windows_10_multiple_editions_version_1703_updated_june_2017_x64_dvd_10725021.iso','https://archive.org/download/Windows-10-1703-french/413%20June%202017/en_windows_10_multiple_editions_version_1703_updated_june_2017_x64_dvd_10725021.iso','https://archive.org/download/fr_windows_10_multi-edition_vl_version_1709_updated_sept_2017_x86_x64/015%20September%202017/en_windows_10_multi-edition_version_1709_updated_sept_2017_x64_dvd_100090817.iso','https://archive.org/download/fr_windows_10_multi-edition_vl_version_1709_updated_sept_2017_x86_x64/015%20September%202017/en_windows_10_multi-edition_version_1709_updated_sept_2017_x64_dvd_100090817.iso','https://archive.org/download/win101803englishx64/Win10_1803_English_x64.iso','https://archive.org/download/win101803englishx64/Win10_1803_English_x64.iso','https://archive.org/download/windows-10-1809-frnehc/0107-september_2018/en_windows_10_consumer_edition_version_1809_updated_sept_2018_x64_dvd_491ea967.iso','https://archive.org/download/windows-10-1809-frnehc/0107-september_2018/en_windows_10_consumer_edition_version_1809_updated_sept_2018_x64_dvd_491ea967.iso','https://archive.org/download/windows-10-1903-french/0175-June_2019/en_windows_10_consumer_edition_version_1903_updated_june_2019_x64_dvd_8d122c90.iso','https://archive.org/download/windows-10-1903-french/0175-June_2019/en_windows_10_consumer_edition_version_1903_updated_june_2019_x64_dvd_8d122c90.iso','https://archive.org/download/win-10-2004-english-data-64_202010/Win10_2004_English_x64.iso','https://archive.org/download/win-10-2004-english-data-64_202010/Win10_2004_English_x64.iso','https://archive.org/download/win-10-20-h2-v2-english-data-64_20210429/Win10_20H2_v2_English_x64.iso','https://archive.org/download/win-10-20-h2-v2-english-data-64_20210429/Win10_20H2_v2_English_x64.iso','https://archive.org/download/Windows10-21h1-french/0928/en_windows_10_consumer_editions_version_21h1_x64_dvd_540c0dd4.iso','https://archive.org/download/Windows10-21h1-french/0928/en_windows_10_consumer_editions_version_21h1_x64_dvd_540c0dd4.iso','https://archive.org/download/fr-fr_windows_10_business_editions_version_21h2_x86_x64/1288/en-us_windows_10_consumer_editions_version_21h2_x64_dvd_6cfdb144.iso','https://archive.org/download/fr-fr_windows_10_business_editions_version_21h2_x86_x64/1288/en-us_windows_10_consumer_editions_version_21h2_x64_dvd_6cfdb144.iso','https://archive.org/download/en-us_windows_10_consumer_editions_version_22h2_updated_feb_2023_x64_dvd_c29e4bb3/en-us_windows_10_consumer_editions_version_22h2_updated_feb_2023_x64_dvd_c29e4bb3.iso','https://archive.org/download/en-us_windows_10_consumer_editions_version_22h2_updated_feb_2023_x64_dvd_c29e4bb3/en-us_windows_10_consumer_editions_version_22h2_updated_feb_2023_x64_dvd_c29e4bb3.iso') >> "%PS%"
 echo. >> "%PS%"
 
 rem --- Windows 11 ---
 rem TODO: find actual skig archive placeholders 
-echo $win11_ed  = @('21H2 - Initial Release (Oct 2021)','22H2 - 2022 Update','23H2 - 2023 Update','24H2 - 2024 Update','IoT LTSC 2024','Back') >> "%PS%"
+echo $win11_ed  = @('21H2 - Initial Release (Oct 2021)','22H2 - 2022 Update','23H2 - 2023 Update','24H2 - 2024 Update','IoT LTSC 2024','Exit') >> "%PS%"
 echo $win11_x64 = @('https://PLACEHOLDER/win11_21h2_x64.iso','https://PLACEHOLDER/win11_22h2_x64.iso','https://PLACEHOLDER/win11_23h2_x64.iso','https://PLACEHOLDER/win11_24h2_x64.iso','https://PLACEHOLDER/win11_ltsc24_x64.iso') >> "%PS%"
 echo. >> "%PS%"
 
 rem --- Windows Server ---
 rem TODO: fill in these PLACEHOLDERs
-echo $winserver_ed  = @('Windows Server 2008','Windows Server 2008 R2','Windows Server 2012','Windows Server 2012 R2','Windows Server 2016 - x64 only','Windows Server 2019 - x64 only','Windows Server 2022 - x64 only','Windows Server 2025 - x64 only','Back') >> "%PS%"
+echo $winserver_ed  = @('Windows Server 2008','Windows Server 2008 R2','Windows Server 2012','Windows Server 2012 R2','Windows Server 2016 - x64 only','Windows Server 2019 - x64 only','Windows Server 2022 - x64 only','Windows Server 2025 - x64 only','Exit') >> "%PS%"
 echo $winserver_x86 = @('https://PLACEHOLDER/winserver_2008_x86.iso','https://PLACEHOLDER/winserver_2008r2_x86.iso','https://PLACEHOLDER/winserver_2012_x86.iso','https://PLACEHOLDER/winserver_2012r2_x86.iso','NONE','NONE','NONE','NONE') >> "%PS%"
 echo $winserver_x64 = @('https://PLACEHOLDER/winserver_2008_x64.iso','https://PLACEHOLDER/winserver_2008r2_x64.iso','https://PLACEHOLDER/winserver_2012_x64.iso','https://PLACEHOLDER/winserver_2012r2_x64.iso','https://PLACEHOLDER/winserver_2016_x64.iso','https://PLACEHOLDER/winserver_2019_x64.iso','https://PLACEHOLDER/winserver_2022_x64.iso','https://PLACEHOLDER/winserver_2025_x64.iso') >> "%PS%"
 echo. >> "%PS%"
 
 
-echo $winltsc_ed  = @('Windows 7 Enterprise','Windows 10 Enterprise LTSC 2015 - x64 only','Windows 10 Enterprise LTSC 2016 - x64 only','Windows 10 Enterprise LTSC 2019 - x64 only','Windows 10 Enterprise LTSC 2021 - x64 only','Windows 11 Enterprise LTSC 2024 - x64 only','Back') >> "%PS%"
+echo $winltsc_ed  = @('Windows 7 Enterprise','Windows 10 Enterprise LTSC 2015 - x64 only','Windows 10 Enterprise LTSC 2016 - x64 only','Windows 10 Enterprise LTSC 2019 - x64 only','Windows 10 Enterprise LTSC 2021 - x64 only','Windows 11 Enterprise LTSC 2024 - x64 only','Exit') >> "%PS%"
 echo $winltsc_x86 = @('https://PLACEHOLDER/win7_ent_x86.iso','NONE','NONE','NONE','NONE','NONE') >> "%PS%"
 echo $winltsc_x64 = @('https://PLACEHOLDER/win7_ent_x64.iso','https://PLACEHOLDER/win10_ltsc_2015_x64.iso','https://PLACEHOLDER/win10_ltsc_2016_x64.iso','https://PLACEHOLDER/win10_ltsc_2019_x64.iso','https://PLACEHOLDER/win10_ltsc_2021_x64.iso','https://PLACEHOLDER/win11_ltsc_2024_x64.iso') >> "%PS%"
 echo. >> "%PS%"
@@ -263,7 +263,20 @@ echo $os_names = @('Windows Vista','Windows 7','Windows 8 / 8.1','Windows 10','W
 echo. >> "%PS%"
 echo while ($true) { >> "%PS%"
 echo     $o = Show-Menu 'Select a Windows version' $os_names >> "%PS%"
-echo     if ($o -eq -1 -or $o -eq 7) { break } >> "%PS%"
+echo     if ($o -eq -1 -or $o -eq 7) { >> "%PS%"
+echo         Clear-Host >> "%PS%"
+echo         Write-Host "" >> "%PS%"
+echo         Write-Host "  Win2ISO - Windows ISO Downloader" -ForegroundColor Green >> "%PS%"
+echo         Write-Host "  =================================" -ForegroundColor DarkGreen >> "%PS%"
+echo         Write-Host "" >> "%PS%"
+echo         Write-Host "  Are you sure you want to exit?" -ForegroundColor Yellow >> "%PS%"
+echo         Write-Host "" >> "%PS%"
+echo         Write-Host "  [Y] Yes - Exit    [N] No - Back to Menu" -ForegroundColor Gray >> "%PS%"
+echo         Write-Host "" >> "%PS%"
+echo         $exitKey = [Console]::ReadKey($true) >> "%PS%"
+echo         if ($exitKey.Key -eq 'Y') { break } >> "%PS%"
+echo         continue >> "%PS%"
+echo     } >> "%PS%"
 
 echo     switch ($o) { >> "%PS%"
 echo         0 { $eds=$vista_ed;  $ax=$vista_x86;  $bx=$vista_x64;  $needArch=$true  } >> "%PS%"
@@ -275,10 +288,24 @@ echo         5 { $eds=$winserver_ed;  $ax=$winserver_x86;  $bx=$winserver_x64;  
 echo         6 { $eds=$winltsc_ed;    $ax=$winltsc_x86;    $bx=$winltsc_x64;    $needArch=$true  } >> "%PS%"
 echo     } >> "%PS%"
 echo     $goBackToOS = $false >> "%PS%"
+echo     $exitApp = $false >> "%PS%"
 echo     while ($true) { >> "%PS%"
 echo         $e = Show-Menu $os_names[$o] $eds >> "%PS%"
 echo         if ($e -eq -1) { $goBackToOS = $true; break } >> "%PS%"
-echo         if ($eds[$e] -eq 'Back') { break } >> "%PS%"
+echo         if ($eds[$e] -eq 'Exit') { >> "%PS%"
+echo             Clear-Host >> "%PS%"
+echo             Write-Host "" >> "%PS%"
+echo             Write-Host "  Win2ISO - Windows ISO Downloader" -ForegroundColor Green >> "%PS%"
+echo             Write-Host "  =================================" -ForegroundColor DarkGreen >> "%PS%"
+echo             Write-Host "" >> "%PS%"
+echo             Write-Host "  Are you sure you want to exit?" -ForegroundColor Yellow >> "%PS%"
+echo             Write-Host "" >> "%PS%"
+echo             Write-Host "  [Y] Yes - Exit    [N] No - Back to Menu" -ForegroundColor Gray >> "%PS%"
+echo             Write-Host "" >> "%PS%"
+echo             $exitKey = [Console]::ReadKey($true) >> "%PS%"
+echo             if ($exitKey.Key -eq 'Y') { $exitApp = $true; break } >> "%PS%"
+echo             continue >> "%PS%"
+echo         } >> "%PS%"
 echo         $url  = '' >> "%PS%"
 echo         $arch = '' >> "%PS%"
 
@@ -316,6 +343,7 @@ echo             $url=$bx[$e] >> "%PS%"
 echo         } >> "%PS%"
 echo         break >> "%PS%"
 echo     } >> "%PS%"
+echo     if ($exitApp) { break } >> "%PS%"
 echo     if ($goBackToOS) { continue } >> "%PS%"
 
 echo     Clear-Host >> "%PS%"
@@ -419,39 +447,13 @@ echo     [Console]::ReadKey($true) ^| Out-Null >> "%PS%"
 echo     [Console]::CursorVisible = $false >> "%PS%"
 echo } >> "%PS%"
 
-rem will fix later
 echo Clear-Host >> "%PS%"
 echo Write-Host "" >> "%PS%"
-echo Write-Host "  Are you sure?" -ForegroundColor Yellow >> "%PS%"
-echo Write-Host "  Closing in 10 seconds..." -ForegroundColor Gray >> "%PS%"
-echo Write-Host "  Press any key to cancel." -ForegroundColor DarkGray >> "%PS%"
+echo Write-Host "  Thanks for using Win2ISO!" -ForegroundColor Green >> "%PS%"
+echo Write-Host "  Goodbye." -ForegroundColor DarkGray >> "%PS%"
 echo Write-Host "" >> "%PS%"
 echo [Console]::CursorVisible = $true >> "%PS%"
-echo $timeout = $true >> "%PS%"
-echo for ($index = 10; $index -gt 0; $index--) { >> "%PS%"
-echo     Write-Host "  $index" -ForegroundColor Cyan >> "%PS%"
-echo     $sw = [System.Diagnostics.Stopwatch]::StartNew() >> "%PS%"
-echo     while ($sw.Elapsed.TotalSeconds -lt 1) { >> "%PS%"
-echo         if ([System.Console]::KeyAvailable) { >> "%PS%"
-echo             $key = [Console]::ReadKey($true) >> "%PS%"
-echo             $timeout = $false >> "%PS%"
-echo             $sw.Stop() >> "%PS%"
-echo             break >> "%PS%"
-echo         } >> "%PS%"
-echo         Start-Sleep -Milliseconds 100 >> "%PS%"
-echo     } >> "%PS%"
-echo     if (-not $timeout) { break } >> "%PS%"
-echo     $cursorTop = [Console]::CursorTop >> "%PS%"
-echo     [Console]::SetCursorPosition(0, $cursorTop - 1) >> "%PS%"
-echo } >> "%PS%"
-echo if (-not $timeout) { >> "%PS%"
-echo     Clear-Host >> "%PS%"
-echo     Write-Host "" >> "%PS%"
-echo     Write-Host "  Cancelled. Returning to menu..." -ForegroundColor Green >> "%PS%"
-echo     Write-Host "" >> "%PS%"
-echo     Start-Sleep -Milliseconds 500 >> "%PS%"
-echo } >> "%PS%"
-echo [Console]::CursorVisible = $false >> "%PS%"
+echo Start-Sleep -Seconds 1 >> "%PS%"
 
 rem this writes a new script in temp
 del "%CURL_INSTALLER%" 2>nul
