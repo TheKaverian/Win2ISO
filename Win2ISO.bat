@@ -11,10 +11,10 @@ rem  make a github error
 rem
 rem  i spent way too long on this
 rem ============================================================
-
+set VER=v1.1.3
 mode con: cols=80 lines=20
 setlocal
-title Win2ISO - Windows ISO Downloader
+title Win2ISO %VER%
 
 powershell.exe -NoProfile -Command "exit" >nul 2>&1
 if errorlevel 1 (
@@ -85,7 +85,7 @@ del "%PS%" 2>nul
 rem bum ass chicken gonna hate 
 
 echo [Console]::CursorVisible = $false >> "%PS%"
-echo $host.UI.RawUI.WindowTitle = 'Win2ISO' >> "%PS%"
+echo $host.UI.RawUI.WindowTitle = 'Win2ISO %VER%' >> "%PS%"
 echo. >> "%PS%"
 echo try { >> "%PS%"
 echo     $psHost = Get-Host >> "%PS%" rem ping me when ur back
@@ -563,5 +563,3 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%PS%"
 del "%PS%" 2>nul
 del "%CURL_INSTALLER%" 2>nul
 endlocal
-
-rem PLEASE GIVE ME MONEY IM A FUCKING PEASANT; ILL MAKE A DONATION PAGE SOON.
