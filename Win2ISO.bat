@@ -11,7 +11,7 @@ rem  make a github error
 rem
 rem  i spent way too long on this
 rem ============================================================
-set VER=v1.3.1
+set VER=v1.3.1b
 mode con: cols=80 lines=20
 setlocal
 title Win2ISO %VER%
@@ -505,7 +505,9 @@ echo                         '  ^|  chicken                                     
 echo                         "  ^|    GitHub :  $esc]8;;https://github.com/Wild-Chicken$esc\github.com/Wild-Chicken$esc]8;;$esc\                                   ^|", >> "%PS%"
 echo                         "  ^|    Email  :  $esc]8;;mailto:postmaster@nuggets.pw$esc\postmaster@nuggets.pw$esc]8;;$esc\                                  ^|", >> "%PS%"
 echo                         '  ^|                                                                        ^|', >> "%PS%"
-echo                         '  ^|  blinx                                            [Designer]           ^|', >> "%PS%"
+echo                         '  ^|  blinx                                           [Designer]           ^|', >> "%PS%"
+echo                         '  ^|                                                                        ^|', >> "%PS%"
+echo                         '  ^|  koy                                             [Designer]           ^|', >> "%PS%"
 echo                         '  ^|                                                                        ^|', >> "%PS%"
 echo                         '  +------------------------------------------------------------------------+', >> "%PS%"
 echo                         '  ^|                                                                        ^|', >> "%PS%"
