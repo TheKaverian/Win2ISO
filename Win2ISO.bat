@@ -11,7 +11,7 @@ rem  make a github error
 rem
 rem  i spent way too long on this
 rem ============================================================
-set VER=v1.3.1b
+set VER=v1.3.2b
 mode con: cols=80 lines=20
 setlocal
 title Win2ISO %VER%
