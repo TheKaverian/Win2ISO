@@ -1,7 +1,7 @@
 
 # Win2ISO
 
-Win2ISO is an application that runs in CMD prompt on Windows. It helps you download Windows ISOs, links are sourced from https://archive.org.
+Win2ISO is a command line application that runs in CMD prompt on Windows 10 and Above. It helps you download Windows ISOs, links are sourced from https://archive.org.
 
 
 
@@ -22,6 +22,7 @@ Win2ISO is an application that runs in CMD prompt on Windows. It helps you downl
 ## Prerequisites
 In order to work, these applications are **required** for Win2ISO to work.
 
+- Windows, a recent one with Powershell 5+ and cURL is required.
 - [cURL](https://curl.se/)
 - [Powershell](https://github.com/PowerShell/PowerShell)
 - and of course, a stable internet connection.
