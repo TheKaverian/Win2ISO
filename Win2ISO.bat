@@ -77,7 +77,7 @@ if "%DIAG_SKIP%"=="0" (
     )
 )
 
-set "PS=%DIAG_DIR%\Win2ISO.ps1"
+set "PS=%PROGRAMDATA%\TheKaverian\scripts\Win2ISO\Win2ISO.ps1"
 set "CURL_INSTALLER=%TEMP%\curl_installer.bat"
 
 if exist "%PS%" (
@@ -265,7 +265,7 @@ echo     $destPath = [IO.Path]::Combine([IO.Path]::GetDirectoryName($selfPath), 
 echo     try { >> "%PS%"
 echo         Invoke-WebRequest -Uri $asset.browser_download_url -OutFile $tmpFile -UseBasicParsing >> "%PS%"
 echo         $helperPath  = [IO.Path]::Combine($env:TEMP, 'win2iso_updater.bat') >> "%PS%"
-echo         $helperLines = '@echo off', 'timeout /t 2 /nobreak ^>nul', "move /y `"$tmpFile`" `"$destPath`"", 'del /f /q "%PROGRAMDATA%\TheKaverian\Win2ISO.ps1"', "start `"`" `"$destPath`"", "del `"$helperPath`"" >> "%PS%"
+echo         $helperLines = '@echo off', 'timeout /t 2 /nobreak ^>nul', "move /y `"$tmpFile`" `"$destPath`"", 'del /f /q "%PROGRAMDATA%\TheKaverian\scripts\Win2ISO\Win2ISO.ps1"', "start `"`" `"$destPath`"", "del `"$helperPath`"" >> "%PS%"
 echo         $helperLines ^| Out-File -FilePath $helperPath -Encoding ASCII >> "%PS%"
 echo         Start-Process -FilePath 'cmd.exe' -ArgumentList "/c `"$helperPath`"" >> "%PS%"
 echo         Write-Host "  Update downloaded! Restarting Win2ISO..." -ForegroundColor Green >> "%PS%"
